@@ -55,7 +55,6 @@ minion = function (name, tbl, k)
     calls = 0,
     args = {}
   }
-
   tbl[k] =  function (...)
     local arguments = {...}
     minions[name].calls = minions[name].calls + 1
@@ -64,7 +63,7 @@ minion = function (name, tbl, k)
   end
 
   return {
-    nobbleReturnValue=function (val)
+    nobbleReturnValue= function (val)
       tbl[k] = function (...)
         -- TODO: 1, 2, refactor!
         local arguments = {...}
