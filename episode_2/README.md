@@ -1,11 +1,5 @@
-#Let's Code and Indie Game - Episode 1 - The Basics
-
-##Tools
-
-- Love2d https://love2d.org/
-- Atom https://atom.io
+#Let's Code and Indie Game - Episode 2 - Keyboard and Entities
 
 ##What's Covered
 
-In this video we look at quickly getting started with Love2d, writing some Lua code and drawing a sprite to the screen.
-
+In this episode we create the beginnings of an entity class to deal with keyboard input from the player. We edit the game so that the sprite drawn to the screen can be moved with the arrow keys.
