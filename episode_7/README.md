@@ -1,4 +1,4 @@
-#Let's Code and Indie Game - Episode 6 - Vectors
+#Let's Code and Indie Game - Episode 7 - Room Entities
 
 ##What's Covered
 
