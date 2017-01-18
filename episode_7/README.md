@@ -2,5 +2,4 @@
 
 ##What's Covered
 
-In this episode we add rooms and a map class so that our player can begin to travel through the game world.
-
+In this episode we move our slime entities to be managed by the room class, this means we can have different slimes in each room. We also pull out a module for creating slimes so we don't have to type so much :)
