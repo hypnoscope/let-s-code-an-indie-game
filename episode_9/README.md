@@ -4,7 +4,7 @@
 
 In this episode we use our view class to follow the player while they are inside of our rooms.
 
-## Useful links
+## Useful links + Attribution
 
 The following links were really useful in putting this episode together
 
