@@ -1,4 +1,4 @@
-#Let's Code and Indie Game - Episode 6 - Room
+#Let's Code and Indie Game - Episode 6 - Rooms
 
 ##What's Covered
 
