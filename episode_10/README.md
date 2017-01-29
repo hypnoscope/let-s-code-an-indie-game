@@ -1,12 +1,6 @@
-#Let's Code and Indie Game - Episode 9 - Room with a View
+#Let's Code and Indie Game - Episode 10 - Tiles Part 1
 
 ##What's Covered
 
-In this episode we use our view class to follow the player while they are inside of our rooms.
+In this episode we add a tilesheet class for loading tiles from a tilesheet, this is the first step to adding graphics for our rooms.
 
-## Useful links + Attribution
-
-The following links were really useful in putting this episode together
-
-- http://nova-fusion.com/2011/04/19/cameras-in-love2d-part-1-the-basics/
-- https://github.com/kikito/gamera
