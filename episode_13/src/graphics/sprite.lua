@@ -4,12 +4,12 @@ local sprite = {}
 
 local draw = function (self, view, x, y)
   view:inContext(function ()
-    local xOffet = self.image:getWidth() / 2
+    local xOffset = self.image:getWidth() / 2
     local yOffset = self.image:getHeight() / 2
-    love.graphics.draw(self.image, x - xOffet, y - yOffset, 0)
+    love.graphics.draw(self.image, x - xOffset, y - yOffset, 0)
 
     if DEBUG then
-      love.graphics.rectangle('line', x, y, 1, 1)
+      love.graphics.rectangle("fill", x, y, 1, 1)
     end
   end)
 end

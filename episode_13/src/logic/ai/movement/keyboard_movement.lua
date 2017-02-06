@@ -4,7 +4,7 @@ keyboardMovement.update = function (entity, game)
   local moving = false
   local dX = 0
   local dY = 0
-  local room = game.map:currentRoom()
+  local currentRoom = game.map:currentRoom()
 
   if love.keyboard.isDown("right") and not moving then
     dX = entity.speed
@@ -25,8 +25,7 @@ keyboardMovement.update = function (entity, game)
 
   local newX = entity.x + dX
   local newY = entity.y + dY
-
-  if room:walkable(newX, newY) then
+  if currentRoom:walkable(newX, newY) then
     entity.x = newX
     entity.y = newY
   end
