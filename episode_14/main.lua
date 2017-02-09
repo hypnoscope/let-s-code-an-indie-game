@@ -14,13 +14,13 @@ local theView
 
 love.load = function ()
   local adventurerSprite = sprite.create("assets/sprites/adventurer.png")
-  local player = entity.create(adventurerSprite, 50, 50, 0, 2, keyboardMovement)
+  local player = entity.create(adventurerSprite, 50, 50, 0, 40, keyboardMovement)
   theView = view.create(270, 180, 0, 0)
   game = gamestate.create(player, theView)
 end
 
-love.update = function ()
-  game:update()
+love.update = function (dt)
+  game:update(dt)
 end
 
 love.draw = function ()

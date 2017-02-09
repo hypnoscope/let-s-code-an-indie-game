@@ -16,8 +16,8 @@ local update = function (self, game)
   local currentRoom = game.map:currentRoom()
   local maxX = (currentRoom.roomWidth - self.gameWidth) + viewOffset
   local maxY = (currentRoom.roomHeight - self.gameHeight) + viewOffset
-  self.x = clamp(-viewOffset, game.player.x - self.gameWidth / 2, maxX)
-  self.y = clamp(-viewOffset, game.player.y - self.gameHeight / 2, maxY)
+  self.x = clamp(-viewOffset, game.player.drawX - self.gameWidth / 2, maxX)
+  self.y = clamp(-viewOffset, game.player.drawY - self.gameHeight / 2, maxY)
 end
 
 local inContext = function (self, drawFunction)

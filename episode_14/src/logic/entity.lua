@@ -1,13 +1,9 @@
+local vector = require("src.math.vector")
+
 local entity = {}
 
 local draw = function (self, view)
   self.sprite:draw(view, self.drawX, self.drawY)
-end
-
-local update = function (self, game)
-  self.movement.update(self, game)
-  self.drawX = self.x
-  self.drawY = self.y - self.z/2
 end
 
 local toPosition = function (self)
@@ -16,6 +12,14 @@ local toPosition = function (self)
     y=self.y,
     z=self.z
   }
+end
+
+
+local update = function (self, game)
+  self.movement.update(self, game)
+  local screenPos = vector.worldToScreen(toPosition(self))
+  self.drawX = screenPos.x
+  self.drawY = screenPos.y
 end
 
 entity.create = function (sprite, x, y, z, speed, movement)

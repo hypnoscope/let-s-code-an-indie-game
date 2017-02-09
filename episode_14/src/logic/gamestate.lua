@@ -6,7 +6,8 @@ local addEntity = function (self, entity)
   table.insert(self.entities, entity)
 end
 
-local update = function (self)
+local update = function (self, dt)
+  self.dt = dt
   self.map:update(self)
   for _, entity in ipairs(self.entities) do
     entity:update(self)
@@ -21,6 +22,9 @@ local draw = function (self)
   for _, entity in ipairs(self.entities) do
     entity:draw(self.view)
   end
+  if DEBUG then
+    love.graphics.print(self.debugString)
+  end
 end
 
 gamestate.create = function (player, view)
@@ -30,6 +34,8 @@ gamestate.create = function (player, view)
   inst.player = player
   inst.map = map.create()
   inst.view = view
+  inst.dt = 0
+  inst.debugString = ""
 
   inst.addEntity = addEntity
   inst.update = update

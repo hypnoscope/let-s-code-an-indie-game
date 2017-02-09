@@ -22,11 +22,11 @@ local update = function (self, game, map)
     entity:update(game)
   end
 
-  if game.player.x > self.roomWidth - self.tilesheet.tileSize then
+  if game.player.drawX > self.roomWidth - self.tilesheet.tileSize then
     map:nextRoom(game)
   end
 
-  if game.player.x < self.tilesheet.tileSize then
+  if game.player.drawX < self.tilesheet.tileSize then
     map:previousRoom(game)
   end
 end
@@ -44,6 +44,10 @@ room.create = function (entities)
   inst.entities = entities
   inst.roomWidth = 50 * inst.tilesheet.tileSize
   inst.roomHeight = 22 * inst.tilesheet.tileSize
+  inst.entranceX = -20
+  inst.entranceZ = 50
+  inst.exitX = 345
+  inst.exitZ = 50
 
   inst.draw = draw
   inst.update = update
