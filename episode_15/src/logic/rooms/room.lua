@@ -44,10 +44,10 @@ room.create = function (entities)
   inst.entities = entities
   inst.roomWidth = 50 * inst.tilesheet.tileSize
   inst.roomHeight = 22 * inst.tilesheet.tileSize
-  inst.entranceX = -20
-  inst.entranceZ = 50
-  inst.exitX = 345
-  inst.exitZ = 50
+  inst.entranceX = -80
+  inst.entranceZ = 140
+  inst.exitX = 275
+  inst.exitZ = 140
 
   inst.draw = draw
   inst.update = update

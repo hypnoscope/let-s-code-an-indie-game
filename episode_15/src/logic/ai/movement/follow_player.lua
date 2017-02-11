@@ -8,10 +8,10 @@ followPlayer.update = function (entity, game)
 
   local distance = v.distance(entityPosition, playerPosition)
 
-  if distance > 10 then
+  if distance > 1 then
     local unitVector = v.normalise(entityPosition, playerPosition)
-    entity.x = entity.x + unitVector.dx * entity.speed
-    entity.y = entity.y + unitVector.dy * entity.speed
+    entity.x = entity.x + unitVector.dx * entity.speed * game.dt
+    entity.z = entity.z + unitVector.dz * entity.speed * game.dt
   end
 end
 

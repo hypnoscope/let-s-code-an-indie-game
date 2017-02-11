@@ -2,8 +2,17 @@ local vector = require("src.math.vector")
 
 local entity = {}
 
+local _positionString = function (self)
+  return math.floor(self.x) .. "," .. math.floor(self.y) .. "," .. math.floor(self.z)
+end
+
 local draw = function (self, view)
   self.sprite:draw(view, self.drawX, self.drawY)
+  if DEBUG then
+    view:inContext(function ()
+      love.graphics.print(_positionString(self), self.drawX, self.drawY)
+    end)
+  end
 end
 
 local toPosition = function (self)

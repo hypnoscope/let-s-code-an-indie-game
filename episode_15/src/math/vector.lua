@@ -2,18 +2,18 @@ local vector = {}
 
 vector.distance = function (from, to)
   local dx = to.x - from.x
-  local dy = to.y - from.y
-  return math.sqrt(dx*dx + dy*dy)
+  local dz = to.z - from.z
+  return math.sqrt(dx*dx + dz*dz)
 end
 
 vector.normalise = function (from, to)
   local dx = to.x - from.x
-  local dy = to.y - from.y
+  local dz = to.z - from.z
   local distance = vector.distance(from, to)
 
   return {
     dx = dx / distance,
-    dy = dy / distance
+    dz = dz / distance
   }
 end
 
