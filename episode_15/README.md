@@ -1,4 +1,4 @@
-#Let's Code and Indie Game - Episode 13 - Tile Collisions
+#Let's Code and Indie Game - Episode 15 - Building a Better Bounce
 
 ##What's Covered
 
