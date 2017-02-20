@@ -8,7 +8,7 @@ local view = require("src.graphics.view")
 local tilesheet = require("src.graphics.tilesheet")
 local tilemap = require("src.logic.rooms.tilemap")
 
-DEBUG = false
+DEBUG = true
 local game
 local theView
 
