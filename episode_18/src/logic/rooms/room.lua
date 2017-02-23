@@ -22,6 +22,12 @@ end
 local update = function (self, game, map)
   for _, entity in ipairs(self.entities) do
     entity:update(game)
+
+    game.player:collisionCheck(entity)
+    entity:collisionCheck(game.player)
+    for _, anotherEntity in ipairs(self.entities) do
+      entity:collisionCheck(anotherEntity)
+    end
   end
 
   if game.player.drawX > self.roomWidth - self.tilesheet.tileSize then

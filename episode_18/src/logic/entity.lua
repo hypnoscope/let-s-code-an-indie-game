@@ -12,6 +12,7 @@ local draw = function (self, view)
   if DEBUG then
     view:inContext(function ()
       love.graphics.print(_positionString(self), self.drawX, self.drawY)
+      if self.debugColor then love.graphics.setColor(self.debugColor) end
       love.graphics.polygon("line", self.boundingBox:getPoints())
     end)
   end
@@ -32,6 +33,13 @@ local update = function (self, game)
   local screenPos = vector.worldToScreen(toPosition(self))
   self.drawX = screenPos.x
   self.drawY = screenPos.y
+end
+
+local collisionCheck = function (self, ent)
+  if self == ent then return end
+  if self.boundingBox:overlaps(ent.boundingBox) then
+    self.debugColor = {255, 0, 255}
+  end
 end
 
 entity.create = function (sprite, x, y, z, speed, movement)
@@ -55,6 +63,7 @@ entity.create = function (sprite, x, y, z, speed, movement)
   inst.draw = draw
   inst.update = update
   inst.toPosition = toPosition
+  inst.collisionCheck = collisionCheck
 
   return inst
 end
