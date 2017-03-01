@@ -20,13 +20,18 @@ local draw = function (self, view)
 end
 
 local update = function (self, game, map)
-  for _, entity in ipairs(self.entities) do
+  for i, entity in ipairs(self.entities) do
+    if entity.finished then
+      table.remove(self.entities, i)
+      break
+    end
+
     entity:update(game)
 
-    game.player:collisionCheck(entity)
-    entity:collisionCheck(game.player)
+    game.player:collisionCheck(entity, game)
+    entity:collisionCheck(game.player, game)
     for _, anotherEntity in ipairs(self.entities) do
-      entity:collisionCheck(anotherEntity)
+      entity:collisionCheck(anotherEntity, game)
     end
   end
 

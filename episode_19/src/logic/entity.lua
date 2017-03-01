@@ -28,23 +28,29 @@ end
 
 
 local update = function (self, game)
-  self.movement.update(self, game)
+  if self.movement then self.movement.update(self, game) end
   self.boundingBox:update(self.x, self.z)
   local screenPos = vector.worldToScreen(toPosition(self))
   self.drawX = screenPos.x
   self.drawY = screenPos.y
 end
 
-local collisionCheck = function (self, ent)
+local collisionCheck = function (self, ent, game)
   if self == ent then return end
   if self.boundingBox:overlaps(ent.boundingBox) then
     self.debugColor = {255, 0, 255}
+    if self.collision then self:collision(ent, game) end
   end
 end
 
-entity.create = function (sprite, x, y, z, speed, movement)
+local done = function (self)
+  self.finished = true
+end
+
+entity.create = function (sprite, x, y, z, speed, movement, collision)
   local inst = {}
 
+  inst.finished = false
   inst.sprite = sprite
   inst.x = x
   inst.y = y
@@ -53,6 +59,7 @@ entity.create = function (sprite, x, y, z, speed, movement)
   inst.drawY = y - z/2
   inst.speed = speed
   inst.movement = movement
+  inst.collision = collision
   inst.boundingBox = rectangle.create(
     x,
     z,
@@ -64,6 +71,7 @@ entity.create = function (sprite, x, y, z, speed, movement)
   inst.update = update
   inst.toPosition = toPosition
   inst.collisionCheck = collisionCheck
+  inst.done = done
 
   return inst
 end
