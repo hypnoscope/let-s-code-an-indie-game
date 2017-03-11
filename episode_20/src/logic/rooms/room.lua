@@ -44,6 +44,10 @@ local update = function (self, game, map)
   end
 end
 
+local addEntity = function (self, ent)
+  table.insert(self.entities, ent)
+end
+
 room.create = function (entities)
   local inst = {}
 
@@ -65,6 +69,7 @@ room.create = function (entities)
   inst.draw = draw
   inst.update = update
   inst.walkable = walkable
+  inst.addEntity = addEntity
 
   return inst
 end

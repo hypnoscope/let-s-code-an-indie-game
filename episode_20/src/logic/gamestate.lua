@@ -27,6 +27,10 @@ local draw = function (self)
   end
 end
 
+local keypressed = function (self, key)
+  if key == 'z' then self.player:action1(self) end
+end
+
 gamestate.create = function (player, view)
   local inst = {}
 
@@ -40,6 +44,7 @@ gamestate.create = function (player, view)
   inst.addEntity = addEntity
   inst.update = update
   inst.draw = draw
+  inst.keypressed = keypressed
 
   return inst
 end

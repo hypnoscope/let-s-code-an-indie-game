@@ -1,10 +1,10 @@
-#Let's Code and Indie Game - Episode 19 - Plink
+#Let's Code and Indie Game - Episode 20 - Punch
 
 ##What's Covered
 
-In this episode we use our collision code to add the first collectible to our game. This is a potion which plays a sound when collected by the player.
+In this episode we use give our player the ability (well half of the ability) to punch when the `z` key is pressed.
 
-##More sound effects
+##Sound Effects
 
-You can make great sound effects with the super-useful (sfxr)[http://www.drpetter.se/project_sfxr.html].
+You can make great sound effects with the super-useful [sfxr](http://www.drpetter.se/project_sfxr.html).
 
