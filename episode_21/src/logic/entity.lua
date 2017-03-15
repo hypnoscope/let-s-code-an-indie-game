@@ -26,8 +26,8 @@ local toPosition = function (self)
   }
 end
 
-
 local update = function (self, game)
+  if self.timer then self.timer:tick(self, game) end
   if self.movement then self.movement.update(self, game) end
   self.boundingBox:update(self.x, self.z)
   local screenPos = vector.worldToScreen(toPosition(self))
@@ -45,6 +45,14 @@ end
 
 local done = function (self)
   self.finished = true
+end
+
+local addTimer = function (self, timer)
+  self.timer = timer
+end
+
+local removeTimer = function (self)
+  self.timer = nil
 end
 
 entity.create = function (sprite, x, y, z, speed, movement, collision)
@@ -72,6 +80,8 @@ entity.create = function (sprite, x, y, z, speed, movement, collision)
   inst.toPosition = toPosition
   inst.collisionCheck = collisionCheck
   inst.done = done
+  inst.addTimer = addTimer
+  inst.removeTimer = removeTimer
 
   return inst
 end

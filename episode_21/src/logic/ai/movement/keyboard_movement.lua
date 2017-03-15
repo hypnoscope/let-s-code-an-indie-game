@@ -3,6 +3,8 @@ local vector = require("src.math.vector")
 local keyboardMovement = {}
 
 keyboardMovement.update = function (entity, game)
+  if entity.interuptMovement then return end
+
   local moving = false
   local dX = 0
   local dZ = 0

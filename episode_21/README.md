@@ -1,10 +1,6 @@
-#Let's Code and Indie Game - Episode 20 - Punch
+#Let's Code and Indie Game - Episode 21 - Timers
 
 ##What's Covered
 
-In this episode we use give our player the ability (well half of the ability) to punch when the `z` key is pressed.
-
-##Sound Effects
-
-You can make great sound effects with the super-useful [sfxr](http://www.drpetter.se/project_sfxr.html).
+In this episode we introduce a timer class and use it to remove our punch entity after a few game 'ticks'. This prevents the punches for hanging around forever.
 
