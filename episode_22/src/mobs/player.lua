@@ -12,7 +12,7 @@ local action1 = function (self, game)
   local currentRoom = game.map:currentRoom()
   currentRoom:addEntity(punch.create(self.x + 8, self.y, self.z))
   self.interuptMovement = true
-  local t = timer.create(5, function (_, owner, game)
+  local t = timer.create(timer.ticks(5), function (_, owner, game)
     owner.interuptMovement = false
   end)
   self:addTimer(t)

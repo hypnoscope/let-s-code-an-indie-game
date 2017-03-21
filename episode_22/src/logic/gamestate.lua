@@ -2,11 +2,16 @@ local map = require("src.logic.rooms.map")
 
 local gamestate = {}
 
+local modulate = function (self)
+  return (self.updates % 2) == 0
+end
+
 local addEntity = function (self, entity)
   table.insert(self.entities, entity)
 end
 
 local update = function (self, dt)
+  self.updates = self.updates + 1
   self.dt = dt
   self.map:update(self)
   for _, entity in ipairs(self.entities) do
@@ -34,6 +39,7 @@ end
 gamestate.create = function (player, view)
   local inst = {}
 
+  inst.updates = 0
   inst.entities = {}
   inst.player = player
   inst.map = map.create()
@@ -45,6 +51,7 @@ gamestate.create = function (player, view)
   inst.update = update
   inst.draw = draw
   inst.keypressed = keypressed
+  inst.modulate = modulate
 
   return inst
 end
