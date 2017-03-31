@@ -33,6 +33,7 @@ local update = function (self, game)
   else
     self.visible = true
   end
+  if self.sprite.update then self.sprite:update(game) end
   if self.timer then self.timer:tick(self, game) end
   if self.movement then self.movement.update(self, game) end
   self.boundingBox:update(self.x, self.z)

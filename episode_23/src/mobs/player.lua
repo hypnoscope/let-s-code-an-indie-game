@@ -1,12 +1,12 @@
 local keyboardMovement = require("src.logic.ai.movement.keyboard_movement")
-local sprite = require("src.graphics.sprite")
+local spritesheet = require("src.graphics.spritesheet")
 local entity = require("src.logic.entity")
 local punch = require("src.items.punch")
 local timer = require("src.logic.timer")
 
 local player = {}
 
-local adventurerSprite = sprite.create("assets/sprites/adventurer.png")
+local adventurerSprite = spritesheet.create("assets/sprites/adventurer.png", 16)
 
 local action1 = function (self, game)
   local currentRoom = game.map:currentRoom()
