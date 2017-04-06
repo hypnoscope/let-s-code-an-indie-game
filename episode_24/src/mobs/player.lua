@@ -3,10 +3,14 @@ local spritesheet = require("src.graphics.spritesheet")
 local entity = require("src.logic.entity")
 local punch = require("src.items.punch")
 local timer = require("src.logic.timer")
+local animation = require("src.graphics.animation")
 
 local player = {}
 
-local adventurerSprite = spritesheet.create("assets/sprites/adventurer.png", 16)
+local adventurerSprite = spritesheet.create(
+  "assets/sprites/adventurer.png",
+  16,
+  animation.STAND)
 
 local action1 = function (self, game)
   local currentRoom = game.map:currentRoom()

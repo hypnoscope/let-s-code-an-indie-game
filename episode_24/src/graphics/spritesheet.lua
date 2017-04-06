@@ -7,33 +7,30 @@ local draw = function (self, view, x, y)
 
     love.graphics.draw(
       self.image,
-      self.sprites[self.currentSprite],
+      self.sprites[self.animation:frame()],
       x - xOffset,
       y - yOffset
     )
   end)
 end
 
-local update = function (self, game)
-  self.frameCount = self.frameCount + game.dt
-
-  if self.frameCount >= self.frameTime then
-    self.currentSprite = self.currentSprite + 1
-    self.frameCount = 0
+local setAnimation = function (self, newAnimation)
+  if newAnimation ~= self.animation then
+    self.animation = newAnimation
   end
-
-  if self.currentSprite > self.maxSprites then self.currentSprite = 1 end
 end
 
-spritesheet.create = function (imagePath, spriteSize)
+local update = function (self, game)
+  self.animation:update(game)
+end
+
+spritesheet.create = function (imagePath, spriteSize, animation)
   local inst = {}
 
   inst.image = love.graphics.newImage(imagePath)
   inst.image:setFilter('nearest', 'nearest')
   inst.sprites = {}
-  inst.currentSprite = 1
-  inst.frameTime = 15 * (1/60)
-  inst.frameCount = 0
+  inst.animation = animation
 
   local spritesWide = inst.image:getWidth() / spriteSize
 
@@ -52,6 +49,7 @@ spritesheet.create = function (imagePath, spriteSize)
 
   inst.draw = draw
   inst.update = update
+  inst.setAnimation = setAnimation
 
   return inst
 end

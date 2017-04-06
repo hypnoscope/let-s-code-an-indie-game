@@ -1,4 +1,5 @@
 local vector = require("src.math.vector")
+local animation = require("src.graphics.animation")
 
 local keyboardMovement = {}
 
@@ -25,6 +26,12 @@ keyboardMovement.update = function (entity, game)
   if love.keyboard.isDown("down") and not moving then
     dZ = entity.speed
     moving = true
+  end
+
+  if moving then
+    entity.sprite:setAnimation(animation.WALK)
+  else
+    entity.sprite:setAnimation(animation.STAND)
   end
 
   local newX = entity.x + dX * game.dt

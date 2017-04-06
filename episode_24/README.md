@@ -1,6 +1,6 @@
-#Let's Code and Indie Game - Episode 23 - iFrames
+#Let's Code and Indie Game - Episode 24 - More Animation
 
 ##What's Covered
 
-In this episode we add a spritesheet class and begin handling animations for our player character.
+In this episode we add split some code out of our spritesheet class to make a new class giving us more control over our animations
 
