@@ -1,4 +1,4 @@
-#Let's Code and Indie Game - Episode 24 - Refactor: Position
+#Let's Code and Indie Game - Episode 25 - Refactor: Position
 
 ##What's Covered
 

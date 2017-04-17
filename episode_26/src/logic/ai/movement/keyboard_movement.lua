@@ -14,10 +14,12 @@ keyboardMovement.update = function (entity, game)
   if love.keyboard.isDown("right") and not moving then
     dX = entity.speed
     moving = true
+    entity.position:faceRight()
   end
   if love.keyboard.isDown("left") and not moving then
     dX = -entity.speed
     moving = true
+    entity.position:faceLeft()
   end
   if love.keyboard.isDown("up") and not moving then
     dZ = -entity.speed
@@ -38,9 +40,9 @@ keyboardMovement.update = function (entity, game)
   local newZ = entity.position.z + dZ * game.dt
 
   if currentRoom:walkable(newX, newZ) then
-    entity.position:update(newX, entity.position.y, newZ)
+    entity.position:setPosition(newX, entity.position.y, newZ)
   end
-  
+
 end
 
 return keyboardMovement

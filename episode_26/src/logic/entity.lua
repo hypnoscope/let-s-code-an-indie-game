@@ -7,7 +7,8 @@ local draw = function (self, view)
   if self.visible then self.sprite:draw(
       view,
       self.position.drawX,
-      self.position.drawY
+      self.position.drawY,
+      self.position.left
     )
   end
   if DEBUG then
@@ -82,8 +83,8 @@ entity.create = function (sprite, position, speed, movement, collision)
   inst.boundingBox = rectangle.create(
     inst.position.x,
     inst.position.z,
-    sprite.image:getWidth(),
-    sprite.image:getHeight()
+    sprite.size,
+    sprite.size
   )
   inst.interuptMovement = false
   inst.vulnerable = true

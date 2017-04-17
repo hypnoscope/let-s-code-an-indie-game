@@ -1,6 +1,6 @@
-#Let's Code and Indie Game - Episode 24 - Refactor: Position
+#Let's Code and Indie Game - Episode 26 - Mirroring
 
 ##What's Covered
 
-In this episode we pause from adding new features to make our entity class simpler. In order to do that we split out the code that handles positions into a new class. 
+In this episode we user mirroring to make our player face the direction they are walking in.
 

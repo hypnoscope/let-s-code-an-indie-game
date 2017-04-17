@@ -16,10 +16,13 @@ local adventurerSprite = spritesheet.create(
 local action1 = function (self, game)
   local currentRoom = game.map:currentRoom()
   local pos = self.position
+  local punchOffset = 10
+  if pos.left then punchOffset = -12 end
   currentRoom:addEntity(punch.create(position.create(
-    pos.x + 8,
+    pos.x + punchOffset,
     pos.y,
-    pos.z
+    pos.z,
+    pos.left
   )))
   self.interuptMovement = true
   local t = timer.create(timer.ticks(5), function (_, owner, game)

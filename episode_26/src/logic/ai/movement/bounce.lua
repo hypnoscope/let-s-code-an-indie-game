@@ -25,7 +25,7 @@ bounce.update = function (entity, game)
 
   local newY = pos.y - (entity.speed * 2 * entity.bounceDirection * game.dt)
 
-  entity.position:update(pos.x, newY, pos.z)
+  entity.position:setPosition(pos.x, newY, pos.z)
 end
 
 return bounce

@@ -1,15 +1,22 @@
 local spritesheet = {}
 
-local draw = function (self, view, x, y)
+local draw = function (self, view, x, y, flipped)
   view:inContext(function ()
-    local xOffset = self.image:getWidth() / 2
-    local yOffset = self.image:getHeight() / 2
+    local xOffset = self.size / 2
+    local yOffset = self.size / 2
+    local xScale = 1
+    if flipped then xScale = -1 end
 
     love.graphics.draw(
       self.image,
       self.sprites[self.animation:frame()],
-      x - xOffset,
-      y - yOffset
+      x,
+      y,
+      0, -- rotation
+      xScale,
+      1,
+      xOffset,
+      yOffset
     )
   end)
 end
@@ -31,6 +38,7 @@ spritesheet.create = function (imagePath, spriteSize, animation)
   inst.image:setFilter('nearest', 'nearest')
   inst.sprites = {}
   inst.animation = animation
+  inst.size = spriteSize
 
   local spritesWide = inst.image:getWidth() / spriteSize
 
