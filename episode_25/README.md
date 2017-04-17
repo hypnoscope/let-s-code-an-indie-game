@@ -1,6 +1,6 @@
-#Let's Code and Indie Game - Episode 24 - More Animation
+#Let's Code and Indie Game - Episode 24 - Refactor: Position
 
 ##What's Covered
 
-In this episode we add split some code out of our spritesheet class to make a new class giving us more control over our animations
+In this episode we pause from adding new features to make our entity class simpler. In order to do that we split out the code that handles positions into a new class. 
 

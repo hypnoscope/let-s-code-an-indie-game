@@ -13,8 +13,8 @@ local collision = function (self, entity, game)
   end
 end
 
-punch.create = function (xPos, yPos, zPos)
-  local punch = entity.create(punchSprite, xPos, yPos, zPos, 0, nil, collision)
+punch.create = function (pos)
+  local punch = entity.create(punchSprite, pos, 0, nil, collision)
   punchSound:play()
 
   local t = timer.create(timer.ticks(6), function (t, ent, game)

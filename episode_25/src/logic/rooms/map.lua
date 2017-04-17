@@ -1,6 +1,7 @@
 local room = require("src.logic.rooms.room")
 local slime = require("src.mobs.slime")
 local magicPotion = require("src.pickups.magic_potion")
+local position = require("src.logic.position")
 
 local map = {}
 
@@ -30,11 +31,12 @@ local _createRoom = function ()
   for i=1, 5 do
     local xPos = math.random(100) + 100
     local zPos = math.random(50) + 100
-    entities[i] = slime.create(xPos, 0, zPos)
+    entities[i] = slime.create(position.create(xPos, 0, zPos))
   end
 
   for i=1, 5 do
-    table.insert(entities, magicPotion.create(150 + i*10, 0, 100))
+    local pos = position.create(150 + i*10, 0, 100)
+    table.insert(entities, magicPotion.create(pos))
   end
 
   return room.create(entities)
@@ -47,8 +49,11 @@ local nextRoom = function (self, game)
 
   local newRoom = self.rooms[self.roomIndex + 1]
 
-  game.player.x = newRoom.entranceX
-  game.player.z = newRoom.entranceZ
+  game.player.position:update(
+    newRoom.entranceX,
+    game.player.position.y,
+    newRoom.entranceZ)
+
   self.roomIndex = self.roomIndex + 1
 end
 
@@ -56,8 +61,11 @@ local previousRoom = function (self, game)
   if self.roomIndex > 1 then
     self.roomIndex = self.roomIndex - 1
     local newRoom = currentRoom(self)
-    game.player.x = newRoom.exitX
-    game.player.z = newRoom.exitZ
+
+    game.player.position:update(
+      newRoom.exitX,
+      game.player.position.y,
+      newRoom.exitZ)
   end
 end
 

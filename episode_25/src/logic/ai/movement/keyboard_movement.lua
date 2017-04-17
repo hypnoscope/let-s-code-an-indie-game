@@ -34,15 +34,13 @@ keyboardMovement.update = function (entity, game)
     entity.sprite:setAnimation(animation.STAND)
   end
 
-  local newX = entity.x + dX * game.dt
-  local newZ = entity.z + dZ * game.dt
+  local newX = entity.position.x + dX * game.dt
+  local newZ = entity.position.z + dZ * game.dt
 
   if currentRoom:walkable(newX, newZ) then
-    entity.x = newX
-    entity.z = newZ
+    entity.position:update(newX, entity.position.y, newZ)
   end
-
-  game.debugString = entity.x .. "," .. entity.y .. "," .. entity.z
+  
 end
 
 return keyboardMovement

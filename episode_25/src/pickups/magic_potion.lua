@@ -17,10 +17,10 @@ local collision = function (self, entity, game)
   end
 end
 
-magicPotion.create = function (xPos, yPos, zPos)
+magicPotion.create = function (pos)
   local potion = entity.create(
     potionSprite,
-    xPos, yPos, zPos,
+    pos,
     0,
     nil,
     collision)

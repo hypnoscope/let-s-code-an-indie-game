@@ -35,11 +35,11 @@ local update = function (self, game, map)
     end
   end
 
-  if game.player.drawX > self.roomWidth - self.tilesheet.tileSize then
+  if game.player.position.drawX > self.roomWidth - self.tilesheet.tileSize then
     map:nextRoom(game)
   end
 
-  if game.player.drawX < self.tilesheet.tileSize then
+  if game.player.position.drawX < self.tilesheet.tileSize then
     map:previousRoom(game)
   end
 end

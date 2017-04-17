@@ -1,30 +1,25 @@
-local vector = require("src.math.vector")
 local rectangle = require("src.math.rectangle")
 local timer = require("src.logic.timer")
 
 local entity = {}
 
-local _positionString = function (self)
-  return math.floor(self.x) .. "," .. math.floor(self.y) .. "," .. math.floor(self.z)
-end
-
 local draw = function (self, view)
-  if self.visible then self.sprite:draw(view, self.drawX, self.drawY) end
+  if self.visible then self.sprite:draw(
+      view,
+      self.position.drawX,
+      self.position.drawY
+    )
+  end
   if DEBUG then
     view:inContext(function ()
-      love.graphics.print(_positionString(self), self.drawX, self.drawY)
+      love.graphics.print(
+        self.position:toString(),
+        self.position.drawX,
+        self.position.drawY)
       if self.debugColor then love.graphics.setColor(self.debugColor) end
       love.graphics.polygon("line", self.boundingBox:getPoints())
     end)
   end
-end
-
-local toPosition = function (self)
-  return {
-    x=self.x,
-    y=self.y,
-    z=self.z
-  }
 end
 
 local update = function (self, game)
@@ -36,10 +31,7 @@ local update = function (self, game)
   if self.sprite.update then self.sprite:update(game) end
   if self.timer then self.timer:tick(self, game) end
   if self.movement then self.movement.update(self, game) end
-  self.boundingBox:update(self.x, self.z)
-  local screenPos = vector.worldToScreen(toPosition(self))
-  self.drawX = screenPos.x
-  self.drawY = screenPos.y
+  self.boundingBox:update(self.position.x, self.position.z)
 end
 
 local collisionCheck = function (self, ent, game)
@@ -78,22 +70,18 @@ local takeDamage = function (self, damage)
   end
 end
 
-entity.create = function (sprite, x, y, z, speed, movement, collision)
+entity.create = function (sprite, position, speed, movement, collision)
   local inst = {}
 
   inst.finished = false
   inst.sprite = sprite
-  inst.x = x
-  inst.y = y
-  inst.z = z
-  inst.drawX = x
-  inst.drawY = y - z/2
+  inst.position = position
   inst.speed = speed
   inst.movement = movement
   inst.collision = collision
   inst.boundingBox = rectangle.create(
-    x,
-    z,
+    inst.position.x,
+    inst.position.z,
     sprite.image:getWidth(),
     sprite.image:getHeight()
   )

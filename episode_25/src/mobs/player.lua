@@ -4,6 +4,7 @@ local entity = require("src.logic.entity")
 local punch = require("src.items.punch")
 local timer = require("src.logic.timer")
 local animation = require("src.graphics.animation")
+local position = require("src.logic.position")
 
 local player = {}
 
@@ -14,7 +15,12 @@ local adventurerSprite = spritesheet.create(
 
 local action1 = function (self, game)
   local currentRoom = game.map:currentRoom()
-  currentRoom:addEntity(punch.create(self.x + 8, self.y, self.z))
+  local pos = self.position
+  currentRoom:addEntity(punch.create(position.create(
+    pos.x + 8,
+    pos.y,
+    pos.z
+  )))
   self.interuptMovement = true
   local t = timer.create(timer.ticks(5), function (_, owner, game)
     owner.interuptMovement = false
@@ -25,9 +31,7 @@ end
 player.create = function ()
   local player = entity.create(
     adventurerSprite,
-    50,
-    0,
-    100,
+    position.create(50, 0, 100),
     56,
     keyboardMovement)
 
