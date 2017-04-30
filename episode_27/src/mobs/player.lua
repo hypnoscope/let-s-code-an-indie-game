@@ -2,7 +2,7 @@ local keyboardMovement = require("src.logic.ai.movement.keyboard_movement")
 local spritesheet = require("src.graphics.spritesheet")
 local entity = require("src.logic.entity")
 local punch = require("src.items.punch")
-local timer = require("src.logic.timer")
+local status = require("src.logic.status")
 local animation = require("src.graphics.animation")
 local position = require("src.logic.position")
 
@@ -25,10 +25,10 @@ local action1 = function (self, game)
     pos.left
   )))
   self.interuptMovement = true
-  local t = timer.create(timer.ticks(5), function (_, owner, game)
+  local t = status.create(status.ticks(5), function (_, owner, game)
     owner.interuptMovement = false
   end)
-  self:addTimer(t)
+  self:addStatus(t)
 end
 
 player.create = function ()

@@ -1,6 +1,5 @@
-#Let's Code and Indie Game - Episode 26 - Mirroring
+# Let's Code and Indie Game - Episode 27 - Damage and Status
 
-##What's Covered
+## What's Covered
 
-In this episode we user mirroring to make our player face the direction they are walking in.
-
+In this episode we make our player take damage but first update our entities to manage multiple statuses (renamed from timers).

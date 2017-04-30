@@ -1,6 +1,6 @@
-local timer = {}
+local status = {}
 
-timer.ticks = function (frames)
+status.ticks = function (frames)
   return frames * (1/60)
 end
 
@@ -9,12 +9,12 @@ local tick = function (self, owner, game)
 
   if self.time >= self.duration then
     self:onDone(owner, game)
-    owner:removeTimer()
+    owner:removeStatus(self)
   end
 
 end
 
-timer.create = function (duration, onDone)
+status.create = function (duration, onDone)
   local inst = {}
 
   inst.time = 0
@@ -26,4 +26,4 @@ timer.create = function (duration, onDone)
   return inst
 end
 
-return timer
+return status

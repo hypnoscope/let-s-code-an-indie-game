@@ -1,5 +1,5 @@
 local rectangle = require("src.math.rectangle")
-local timer = require("src.logic.timer")
+local status = require("src.logic.status")
 
 local entity = {}
 
@@ -30,7 +30,7 @@ local update = function (self, game)
     self.visible = true
   end
   if self.sprite.update then self.sprite:update(game) end
-  if self.timer then self.timer:tick(self, game) end
+  for _, status in ipairs(self.statuses) do status:tick(self, game) end
   if self.movement then self.movement.update(self, game) end
   self.boundingBox:update(self.position.x, self.position.z)
 end
@@ -47,12 +47,16 @@ local done = function (self)
   self.finished = true
 end
 
-local addTimer = function (self, timer)
-  self.timer = timer
+local addStatus = function (self, status)
+  table.insert(self.statuses, status)
 end
 
-local removeTimer = function (self)
-  self.timer = nil
+local removeStatus = function (self, statusToRemove)
+  for i, status in ipairs(self.statuses) do
+    if status == statusToRemove then
+      table.remove(self.statuses, i)
+    end
+  end
 end
 
 local takeDamage = function (self, damage)
@@ -63,7 +67,7 @@ local takeDamage = function (self, damage)
     else
       self.vulnerable = false
       self.iframes = true
-      self:addTimer(timer.create(timer.ticks(20), function (_, ent, game)
+      self:addStatus(status.create(status.ticks(100), function (_, ent, game)
         ent.vulnerable = true
         ent.iframes = false
       end))
@@ -74,6 +78,7 @@ end
 entity.create = function (sprite, position, speed, movement, collision)
   local inst = {}
 
+  inst.statuses = {}
   inst.finished = false
   inst.sprite = sprite
   inst.position = position
@@ -97,8 +102,8 @@ entity.create = function (sprite, position, speed, movement, collision)
   inst.toPosition = toPosition
   inst.collisionCheck = collisionCheck
   inst.done = done
-  inst.addTimer = addTimer
-  inst.removeTimer = removeTimer
+  inst.addStatus = addStatus
+  inst.removeStatus = removeStatus
   inst.takeDamage = takeDamage
 
   return inst
