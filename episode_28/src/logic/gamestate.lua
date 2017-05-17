@@ -30,7 +30,6 @@ end
 
 local draw = function (self)
   self.map:draw(self.view)
-  self.player:draw(self.view)
   for _, entity in ipairs(self.entities) do
     entity:draw(self.view)
   end
