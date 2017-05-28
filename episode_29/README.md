@@ -1,5 +1,5 @@
-# Let's Code and Indie Game - Episode 28 - Knockback
+# Let's Code and Indie Game - Episode 28 - Another Room
 
 ##  What's Covered
 
-In this episode we update our status class so that we can use it to add knockback to punched entities.
+In this episode we add a second room (with a fancy background) to our game. 

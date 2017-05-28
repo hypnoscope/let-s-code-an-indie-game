@@ -1,6 +1,5 @@
 local vector = require("src.math.vector")
 local tilesheet = require("src.graphics.tilesheet")
-local tilemap = require("src.logic.rooms.tilemap")
 
 local room = {}
 
@@ -8,7 +7,7 @@ local walkable = function (self, x, z)
   local screenPos = vector.worldToScreen({x=x, z=z, y=0})
   if screenPos.x < 0 or screenPos.y < 0 then return false end
   local tileChar = self.tilemap:getTile(screenPos.x, screenPos.y, self.tilesheet.tileSize)
-  return (tileChar == ',' or tileChar == ".")
+  return (tileChar == ',' or tileChar == "." or tileChar == "~")
 end
 
 local draw = function (self, view)
@@ -48,11 +47,11 @@ local addEntity = function (self, ent)
   table.insert(self.entities, ent)
 end
 
-room.create = function (entities)
+room.create = function (tilemap, entities)
   local inst = {}
 
   inst.tilesheet = tilesheet.create("assets/sprites/tiles/dungeon.png", 8)
-  inst.tilemap = tilemap.create()
+  inst.tilemap = tilemap
 
   inst.color = {
     math.random(255), math.random(255), math.random(255)

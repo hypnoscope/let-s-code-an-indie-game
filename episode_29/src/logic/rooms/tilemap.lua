@@ -9,6 +9,12 @@ local getTile = function (self, x, y, tileSize)
 end
 
 local draw = function (self, view, tilesheet)
+  if self.background then
+    view:inBackgroundContext(function ()
+      love.graphics.draw(self.background, 0, 0)
+    end)
+  end
+
   for i = 1, #self.map do
     local char = self.map:sub(i,i)
     local x = ((i-1) % self.tilesWide) * tilesheet.tileSize
@@ -22,6 +28,7 @@ local draw = function (self, view, tilesheet)
     if char == "s" then tilesheet:drawTile(view, x, y, 4, 2) end
     if char == "X" then tilesheet:drawTile(view, x, y, 3, 2) end
     if char == "v" then tilesheet:drawTile(view, x, y, 1, 3) end
+    if char == "~" then tilesheet:drawTile(view, x, y, 2, 3) end
 
     if DEBUG and i == self.lastGotTile then
       view:inContext(function ()
@@ -32,41 +39,17 @@ local draw = function (self, view, tilesheet)
   end
 end
 
-tilemap.create = function ()
+tilemap.create = function (floorplan, background)
   local inst = {}
 
+  inst.background = background
   inst.tilesWide = 50
   inst.tilesHeigh = 22
   inst.lastGotTile = 0
 
-  local map = [[
-  ^^^^^^^^^^^^^^^^^^^^^XXX^^^^^^^^^^^^^^^^^^^^^^^^^^
-  xxxxxxxxxxxxxxxxxxxxxXXXxxxxxxxxxxxxxxxxxxxxxxxxxx
-  xxxxxxxxxxxxxxxxxxxxxXXXxxxxxxxxxxxxxxxxxxxxxxxxxx
-  xxxxxxxxxxxxxxxxxxxxxXXXxxxxxxxxxxxxxxxxxxxxxxxxxx
-  =====================XXXxxxxxxxxxxxxxxxxxxxxxxxxxx
-  .....................sXXxxxxxxxxxxxxxxxxxxxxxxxxxx
-  ......................sXxxxxxxxxxxxxxxxxxxxxxxxxxx
-  .......................s==========================
-  ......,...........................................
-  ..................................................
-  ..................................................
-  .....................,............................
-  ..................................................
-  ..................................................
-  ..................................................
-  ...................................,..............
-  vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-  ]]
-
   local whitespace = "%s"
   local nothing = ""
-  inst.map = map:gsub(whitespace, nothing)
+  inst.map = floorplan:gsub(whitespace, nothing)
 
   inst.draw = draw
   inst.getTile = getTile

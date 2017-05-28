@@ -10,7 +10,7 @@ local clamp = function (min, n, max)
   return n
 end
 
-local viewOffset = 10
+local viewOffset = 0
 
 local update = function (self, game)
   local currentRoom = game.map:currentRoom()
@@ -29,6 +29,14 @@ local inContext = function (self, drawFunction)
   love.graphics.pop()
 end
 
+local inBackgroundContext = function (self, drawFunction)
+  local scale = scale(self)
+  love.graphics.push('all')
+  love.graphics.scale(scale, scale)
+  drawFunction()
+  love.graphics.pop()
+end
+
 view.create = function (gameWidth, gameHeight, x, y)
   local inst = {}
 
@@ -38,6 +46,7 @@ view.create = function (gameWidth, gameHeight, x, y)
   inst.y = y
 
   inst.inContext = inContext
+  inst.inBackgroundContext = inBackgroundContext
   inst.update = update
 
   return inst
