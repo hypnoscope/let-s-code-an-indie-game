@@ -18,6 +18,8 @@ local draw = function (self, view)
   end
 end
 
+local roomChangeThreshold = 2
+
 local update = function (self, game, map)
   for i, entity in ipairs(self.entities) do
     if entity.finished then
@@ -34,17 +36,25 @@ local update = function (self, game, map)
     end
   end
 
-  if game.player.position.drawX > self.roomWidth - self.tilesheet.tileSize then
+  if game.player.position.drawX > self.roomWidth - roomChangeThreshold then
     map:nextRoom(game)
   end
 
-  if game.player.position.drawX < self.tilesheet.tileSize then
+  if game.player.position.drawX < roomChangeThreshold then
     map:previousRoom(game)
   end
 end
 
 local addEntity = function (self, ent)
   table.insert(self.entities, ent)
+end
+
+local getEntrance = function (self)
+  return self.tilemap.playerStartLeft
+end
+
+local getExit = function (self)
+  return self.tilemap.playerStartRight
 end
 
 room.create = function (tilemap, entities)
@@ -58,17 +68,14 @@ room.create = function (tilemap, entities)
   }
 
   inst.entities = entities
-  inst.roomWidth = 50 * inst.tilesheet.tileSize
-  inst.roomHeight = 22 * inst.tilesheet.tileSize
-  inst.entranceX = -80
-  inst.entranceZ = 140
-  inst.exitX = 275
-  inst.exitZ = 140
+  inst.roomWidth = tilemap.tilesWide * inst.tilesheet.tileSize
 
   inst.draw = draw
   inst.update = update
   inst.walkable = walkable
   inst.addEntity = addEntity
+  inst.getEntrance = getEntrance
+  inst.getExit = getExit
 
   return inst
 end

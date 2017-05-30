@@ -1,5 +1,5 @@
-# Let's Code and Indie Game - Episode 28 - Another Room
+# Let's Code and Indie Game - Episode 28 - Room fixup
 
 ##  What's Covered
 
-In this episode we add a second room (with a fancy background) to our game. 
+In this episode we make a few fixes based on adding a second room 

@@ -54,11 +54,10 @@ local nextRoom = function (self, game)
   end
 
   local newRoom = self.rooms[self.roomIndex + 1]
+  local startPosition = newRoom:getEntrance()
 
   game.player.position:setPosition(
-    newRoom.entranceX,
-    game.player.position.y,
-    newRoom.entranceZ)
+    startPosition.x, startPosition.y, startPosition.z)
 
   self.roomIndex = self.roomIndex + 1
 end
@@ -66,12 +65,12 @@ end
 local previousRoom = function (self, game)
   if self.roomIndex > 1 then
     self.roomIndex = self.roomIndex - 1
+
     local newRoom = currentRoom(self)
+    local startPosition = newRoom:getExit()
 
     game.player.position:setPosition(
-      newRoom.exitX,
-      game.player.position.y,
-      newRoom.exitZ)
+      startPosition.x, startPosition.y, startPosition.z)
   end
 end
 

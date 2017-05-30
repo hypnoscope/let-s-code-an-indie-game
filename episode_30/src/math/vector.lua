@@ -17,12 +17,10 @@ vector.normalise = function (from, to)
   }
 end
 
-local theta = math.rad(45)
-
 vector.worldToScreen = function (vec3)
   return {
-    x = vec3.x + vec3.z * math.cos(theta),
-    y = vec3.y + vec3.z * math.sin(theta)
+    x = vec3.x,
+    y = vec3.y + vec3.z
   }
 end
 

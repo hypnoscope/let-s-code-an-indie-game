@@ -2,7 +2,7 @@ local gamestate = require("src.logic.gamestate")
 local view = require("src.graphics.view")
 local player = require("src.mobs.player")
 
-DEBUG = false
+DEBUG = true
 local game
 local theView
 

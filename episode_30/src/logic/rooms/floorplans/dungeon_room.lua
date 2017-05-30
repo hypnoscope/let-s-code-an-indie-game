@@ -25,4 +25,9 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ]]
 
-return tilemap.create(dungeonRoomFloorplan)
+return tilemap.create(
+  dungeonRoomFloorplan,
+  50,
+  nil,
+  {x=2, y=0, z=90},
+  {x=386, y=0, z=90})
