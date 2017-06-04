@@ -4,8 +4,12 @@ local magicPotion = require("src.pickups.magic_potion")
 local position = require("src.logic.position")
 local dungeonRoom = require("src.logic.rooms.floorplans.dungeon_room")
 local bridgeRoom = require("src.logic.rooms.floorplans.bridge")
+local random = require("src.math.random")
+local tilesheet = require("src.graphics.tilesheet")
 
 local map = {}
+
+local tilemaps = {dungeonRoom, bridgeRoom}
 
 local draw = function (self, view)
   self.rooms[self.roomIndex]:draw(view)
@@ -29,11 +33,16 @@ end
 
 local _createRoom = function ()
   local entities = {}
+  local tilemap = random.pick(tilemaps)
+  local tiles = tilesheet.create("assets/sprites/tiles/dungeon.png", 8)
+  local availablePositions = tilemap:getWalkablePositions(
+    tiles.tileSize,
+    290,
+    300)
 
   for i=1, 5 do
-    local xPos = math.random(100) + 100
-    local zPos = math.random(50) + 100
-    entities[i] = slime.create(position.create(xPos, 0, zPos))
+    local pos = random.pick(availablePositions)
+    entities[i] = slime.create(position.create(pos[1], 0, pos[2]))
   end
 
   for i=1, 5 do
@@ -41,11 +50,7 @@ local _createRoom = function ()
     table.insert(entities, magicPotion.create(pos))
   end
 
-  if love.math.random() > 0.5 then
-    return room.create(bridgeRoom, entities)
-  else
-    return room.create(dungeonRoom, entities)
-  end
+  return room.create(tilemap, tiles, entities)
 end
 
 local nextRoom = function (self, game)

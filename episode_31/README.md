@@ -1,5 +1,5 @@
-# Let's Code and Indie Game - Episode 28 - Room fixup
+# Let's Code and Indie Game - Episode 31 - Spawn Positions
 
 ##  What's Covered
 
-In this episode we make a few fixes based on adding a second room 
+In this episode we change the code that spawns our enemies so that they always appear in walkable positions (and no longer get trapped in walls).

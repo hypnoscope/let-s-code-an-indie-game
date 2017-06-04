@@ -1,5 +1,4 @@
 local vector = require("src.math.vector")
-local tilesheet = require("src.graphics.tilesheet")
 
 local room = {}
 
@@ -57,10 +56,10 @@ local getExit = function (self)
   return self.tilemap.playerStartRight
 end
 
-room.create = function (tilemap, entities)
+room.create = function (tilemap, tilesheet, entities)
   local inst = {}
 
-  inst.tilesheet = tilesheet.create("assets/sprites/tiles/dungeon.png", 8)
+  inst.tilesheet = tilesheet
   inst.tilemap = tilemap
 
   inst.color = {

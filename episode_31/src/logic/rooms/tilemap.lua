@@ -8,6 +8,26 @@ local getTile = function (self, x, y, tileSize)
   return self.map:sub(i,i)
 end
 
+local _walkable = function (char)
+  return (char == '.' or char == ',' or char == '~')
+end
+
+local getWalkablePositions = function (self, tileSize, xStart, xEnd)
+  local walkablePositions = {}
+
+  for i = 1, #self.map do
+    local char = self.map:sub(i, i)
+    local x = ((i - 1) % self.tilesWide) * tileSize
+
+    if _walkable(char) and (x >= xStart and x < xEnd) then
+      local y = math.floor((i-1) / self.tilesWide) * tileSize
+      table.insert(walkablePositions, {x, y})
+    end
+  end
+
+  return walkablePositions
+end
+
 local draw = function (self, view, tilesheet)
   if self.background then
     view:inBackgroundContext(function ()
@@ -60,6 +80,7 @@ tilemap.create = function (
 
   inst.draw = draw
   inst.getTile = getTile
+  inst.getWalkablePositions = getWalkablePositions
 
   return inst
 end
