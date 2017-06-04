@@ -1,4 +1,4 @@
-# Let's Code and Indie Game - Episode 28 - Room fixup
+# Let's Code and Indie Game - Episode 30 - Room fixup
 
 ##  What's Covered
 
