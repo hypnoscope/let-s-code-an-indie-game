@@ -1,21 +1,20 @@
 local entity = require("src.logic.entity")
 local sprite = require("src.graphics.sprite")
-local status = require("src.logic.status")
 local knockback = require("src.logic.statuses.knockback")
 local removeSelf = require("src.logic.statuses.remove_self")
 
-local punch = {}
+local sword = {}
 
-local punchSprite = sprite.create("assets/sprites/punch.png")
-local punchSound = love.audio.newSource("assets/sounds/punch.wav", "static")
+local speed = 0
+local noMovement = nil
+local swordSprite = sprite.create("assets/sprites/sword.png")
+local swordSound = love.audio.newSource("assets/sounds/sword.wav", "static")
 
 local collision = function (self, entity, game)
   if game.player ~= entity then
-    entity:takeDamage(1)
-
+    entity:takeDamage(3)
     local duration = 20
     local strength = 8
-
     entity:addStatus(knockback.create(
       duration,
       entity,
@@ -24,22 +23,19 @@ local collision = function (self, entity, game)
   end
 end
 
-local speed = 0
-local noMovement = nil
-
-punch.create = function (pos)
-  local punch = entity.create(
-    punchSprite,
+sword.create = function (pos)
+  local inst = entity.create(
+    swordSprite,
     pos,
     speed,
     noMovement,
     collision)
 
-  punchSound:play()
+  swordSound:play()
 
-  punch:addStatus(removeSelf.create(6))
+  inst:addStatus(removeSelf.create(6))
 
-  return punch
+  return inst
 end
 
-return punch
+return sword

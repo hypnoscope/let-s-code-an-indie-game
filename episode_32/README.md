@@ -1,5 +1,5 @@
-# Let's Code and Indie Game - Episode 31 - Spawn Positions
+# Let's Code and Indie Game - Episode 32 - Swords!
 
 ##  What's Covered
 
-In this episode we change the code that spawns our enemies so that they always appear in walkable positions (and no longer get trapped in walls).
+In this episode we add a sword to our game and tidy up some of our entity spawning code.

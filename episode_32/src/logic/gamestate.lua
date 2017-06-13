@@ -41,6 +41,7 @@ end
 
 local keypressed = function (self, key)
   if key == 'z' then self.player:action1(self) end
+  if key == 'x' then self.player:action2(self) end
 end
 
 gamestate.create = function (player, view)

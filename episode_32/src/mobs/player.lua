@@ -2,6 +2,7 @@ local keyboardMovement = require("src.logic.ai.movement.keyboard_movement")
 local spritesheet = require("src.graphics.spritesheet")
 local entity = require("src.logic.entity")
 local punch = require("src.items.punch")
+local sword = require("src.items.sword")
 local status = require("src.logic.status")
 local animation = require("src.graphics.animation")
 local position = require("src.logic.position")
@@ -13,22 +14,41 @@ local adventurerSprite = spritesheet.create(
   16,
   animation.STAND)
 
-local action1 = function (self, game)
+local _spawnEntity = function (self, entityToSpawn, game)
   local currentRoom = game.map:currentRoom()
   local pos = self.position
-  local punchOffset = 10
-  if pos.left then punchOffset = -12 end
-  currentRoom:addEntity(punch.create(position.create(
-    pos.x + punchOffset,
+  local offset = 10
+  if pos.left then offset = -12 end
+
+  currentRoom:addEntity(entityToSpawn.create(position.create(
+    pos.x + offset,
     pos.y,
     pos.z,
     pos.left
   )))
-  self.interuptMovement = true
-  local t = status.create(status.ticks(5), function (_, owner, game)
-    owner.interuptMovement = false
-  end)
+end
+
+local _interuptMovement = function (self)
+  local t = status.create(
+    status.ticks(5),
+    function (_, owner, game)
+      owner.interuptMovement = false
+    end,
+    function ()
+      self.interuptMovement = true
+    end)
+
   self:addStatus(t)
+end
+
+local action2 = function (self, game)
+  _spawnEntity(self, sword, game)
+  _interuptMovement(self)
+end
+
+local action1 = function (self, game)
+  _spawnEntity(self, punch, game)
+  _interuptMovement(self)
 end
 
 player.create = function ()
@@ -39,6 +59,7 @@ player.create = function ()
     keyboardMovement)
 
   player.action1 = action1
+  player.action2 = action2
 
   return player
 end
