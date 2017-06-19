@@ -1,4 +1,5 @@
 local map = require("src.logic.rooms.map")
+local inventory = require("src.logic.inventory")
 
 local gamestate = {}
 
@@ -44,12 +45,21 @@ local keypressed = function (self, key)
   if key == 'x' then self.player:action2(self) end
 end
 
+local getInventory = function (self)
+  return self.inventory
+end
+
+local getPlayer = function (self)
+  return self.player
+end
+
 gamestate.create = function (player, view)
   local inst = {}
 
   inst.updates = 0
   inst.entities = { player }
   inst.player = player
+  inst.inventory = inventory.create()
   inst.map = map.create()
   inst.view = view
   inst.dt = 0
@@ -60,6 +70,8 @@ gamestate.create = function (player, view)
   inst.draw = draw
   inst.keypressed = keypressed
   inst.modulate = modulate
+  inst.getInventory = getInventory
+  inst.getPlayer = getPlayer
 
   return inst
 end

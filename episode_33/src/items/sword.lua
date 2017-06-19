@@ -10,6 +10,8 @@ local noMovement = nil
 local swordSprite = sprite.create("assets/sprites/sword.png")
 local swordSound = love.audio.newSource("assets/sounds/sword.wav", "static")
 
+sword.SPRITE = swordSprite
+
 local collision = function (self, entity, game)
   if game.player ~= entity then
     entity:takeDamage(3)

@@ -47,7 +47,10 @@ local action2 = function (self, game)
 end
 
 local action1 = function (self, game)
-  _spawnEntity(self, punch, game)
+  local inventory = game:getInventory()
+  local itemToSpawn = inventory:getItem()
+
+  _spawnEntity(self, itemToSpawn, game)
   _interuptMovement(self)
 end
 
