@@ -15,14 +15,6 @@ local tilemaps = {dungeonRoom, bridgeRoom}
 
 local draw = function (self, view)
   self.rooms[self.roomIndex]:draw(view)
-
-  love.graphics.printf(
-    "Room " .. self.roomIndex,
-    350,
-    20,
-    100,
-    "center"
-  )
 end
 
 local currentRoom = function (self)

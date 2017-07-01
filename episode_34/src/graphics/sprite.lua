@@ -25,6 +25,10 @@ local draw = function (self, view, x, y, flipped)
   end)
 end
 
+local getImage = function (self)
+  return self.image
+end
+
 sprite.create = function (imagePath)
   local inst = {}
 
@@ -33,6 +37,7 @@ sprite.create = function (imagePath)
   inst.size = inst.image:getWidth()
 
   inst.draw = draw
+  inst.getImage = getImage
 
   return inst
 end

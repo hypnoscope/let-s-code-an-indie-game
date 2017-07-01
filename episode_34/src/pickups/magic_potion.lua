@@ -13,6 +13,8 @@ local potionSound = love.audio.newSource(
 local collision = function (self, entity, game)
   if entity == game.player then
     potionSound:play()
+    local inventory = game:getInventory()
+    inventory:addPotion()
     self:done()
   end
 end

@@ -18,16 +18,27 @@ local update = function (self, game)
   self.x = clamp(-viewOffset, game.player.position.drawX - self.gameWidth / 2, maxX)
 end
 
+local displayOffset = 10
+
 local inContext = function (self, drawFunction)
   local scale = scale(self)
   love.graphics.push('all')
   love.graphics.scale(scale, scale)
-  love.graphics.translate(-self.x, -self.y)
+  love.graphics.translate(-self.x, -self.y + displayOffset)
   drawFunction()
   love.graphics.pop()
 end
 
 local inBackgroundContext = function (self, drawFunction)
+  local scale = scale(self)
+  love.graphics.push('all')
+  love.graphics.scale(scale, scale)
+  love.graphics.translate(0, displayOffset)
+  drawFunction()
+  love.graphics.pop()
+end
+
+local inDisplayContext = function (self, drawFunction)
   local scale = scale(self)
   love.graphics.push('all')
   love.graphics.scale(scale, scale)
@@ -45,6 +56,7 @@ view.create = function (gameWidth, gameHeight, x, y)
 
   inst.inContext = inContext
   inst.inBackgroundContext = inBackgroundContext
+  inst.inDisplayContext = inDisplayContext
   inst.update = update
 
   return inst
