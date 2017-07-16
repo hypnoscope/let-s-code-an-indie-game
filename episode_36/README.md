@@ -1,5 +1,5 @@
-# Let's Code and Indie Game - Episode 35 - Pause
+# Let's Code and Indie Game - Episode 36 - Menu
 
 ##  What's Covered
 
-In this episode we add a way of switching between game states so that we can pause the game. 
+In this episode we start adding a menu class to use in the pause menu.

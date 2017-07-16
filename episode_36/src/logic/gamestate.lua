@@ -50,7 +50,7 @@ end
 local keypressed = function (self, key)
   if key == 'z' then self.player:action1(self) end
   if key == 'x' then self.player:action2(self) end
-  if key == 'q' then gameController.get():pushState(self.pause) end
+  if key == 'escape' then gameController.get():pushState(self.pause) end
 end
 
 local getInventory = function (self)
