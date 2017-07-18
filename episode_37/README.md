@@ -1,5 +1,5 @@
-# Let's Code and Indie Game - Episode 36 - Menu
+# Let's Code and Indie Game - Episode 37 - More Menus
 
 ##  What's Covered
 
-In this episode we start adding a menu class to use in the pause menu.
+In this episode we finish off our pause menu (for now) and add the ability for multiple menus to be open at once.

@@ -24,6 +24,11 @@ local keypressed = function (self, key)
   _getActiveState(self):keypressed(key)
 end
 
+local exit = function (self)
+  local okay = 0
+  love.event.quit(okay)
+end
+
 local create = function ()
   local inst = {}
 
@@ -34,6 +39,7 @@ local create = function ()
   inst.keypressed = keypressed
   inst.pushState = pushState
   inst.popState = popState
+  inst.exit = exit
 
   return inst
 end
