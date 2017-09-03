@@ -33,7 +33,9 @@ local update = function (self, game)
   end
   if self.sprite.update then self.sprite:update(game) end
   for _, status in ipairs(self.statuses) do status:tick(self, game) end
-  if self.movement then self.movement.update(self, game) end
+  if self.movement and not self.interruptMovement then
+    self.movement.update(self, game)
+  end
   self.boundingBox:update(self.position.x, self.position.z)
 end
 

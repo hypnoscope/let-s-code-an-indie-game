@@ -56,6 +56,10 @@ local getExit = function (self)
   return self.tilemap.playerStartRight
 end
 
+local getEntities = function (self)
+  return self.entities
+end
+
 room.create = function (tilemap, tilesheet, entities)
   local inst = {}
 
@@ -75,6 +79,7 @@ room.create = function (tilemap, tilesheet, entities)
   inst.addEntity = addEntity
   inst.getEntrance = getEntrance
   inst.getExit = getExit
+  inst.getEntities = getEntities
 
   return inst
 end

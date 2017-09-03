@@ -20,6 +20,14 @@ local addPotion = function (self)
   self.potionCount = self.potionCount + 1
 end
 
+local getPotions = function (self)
+  return self.potionCount
+end
+
+local setPotions = function (self, n)
+  self.potionCount = n
+end
+
 inventory.create = function ()
   local inst = {}
 
@@ -29,6 +37,8 @@ inventory.create = function ()
   inst.getItem = getItem
   inst.setItem = setItem
   inst.addPotion = addPotion
+  inst.getPotions = getPotions
+  inst.setPotions = setPotions
 
   return inst
 end

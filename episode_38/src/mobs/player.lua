@@ -6,6 +6,7 @@ local sword = require("src.items.sword")
 local status = require("src.logic.status")
 local animation = require("src.graphics.animation")
 local position = require("src.logic.position")
+local storm = require("src.spells.storm")
 
 local player = {}
 
@@ -41,9 +42,10 @@ local _interuptMovement = function (self)
   self:addStatus(t)
 end
 
+local stormSpell = storm.create()
+
 local action2 = function (self, game)
-  _spawnEntity(self, sword, game)
-  _interuptMovement(self)
+  stormSpell:cast(game)
 end
 
 local action1 = function (self, game)
