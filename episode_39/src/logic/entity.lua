@@ -74,6 +74,10 @@ local takeDamage = function (self, damage)
   end
 end
 
+local getPosition = function (self)
+  return self.position
+end
+
 entity.create = function (sprite, position, speed, movement, collision)
   local inst = {}
 
@@ -98,7 +102,7 @@ entity.create = function (sprite, position, speed, movement, collision)
 
   inst.draw = draw
   inst.update = update
-  inst.toPosition = toPosition
+  inst.getPosition = getPosition
   inst.collisionCheck = collisionCheck
   inst.done = done
   inst.addStatus = addStatus

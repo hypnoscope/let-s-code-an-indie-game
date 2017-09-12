@@ -1,5 +1,5 @@
-# Let's Code and Indie Game - Episode 37 - More Menus
+# Let's Code and Indie Game - Episode 39 - Lightning!
 
 ##  What's Covered
 
-In this episode we finish off our pause menu (for now) and add the ability for multiple menus to be open at once.
+In this episode we add lightning graphics for when the storm spell gets cast.
